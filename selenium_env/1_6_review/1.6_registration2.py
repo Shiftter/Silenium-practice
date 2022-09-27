@@ -1,7 +1,6 @@
-import math
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import time
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -9,19 +8,21 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 link = "http://suninjuly.github.io/registration2.html"
 
 try:
+
+    link = "http://suninjuly.github.io/registration2.html"
     browser = webdriver.Chrome(options=options)
     browser.get(link)
-    first = browser.find_element(By.CSS_SELECTOR,'.first_class :required')
+    first = browser.find_element(By.CSS_SELECTOR, '.first_class :required')
     first.send_keys('text')
-    second = browser.find_element(By.XPATH,"//div/*[@class='form-control second' and @required]")
+    second = browser.find_element(By.CSS_SELECTOR, '.form-control.second')
     second.send_keys('text')
-    third = browser.find_element(By.CSS_SELECTOR,'.form-control.third')
+    third = browser.find_element(By.CSS_SELECTOR, '.form-control.third')
     third.send_keys('text')
-    button = browser.find_element(By.CSS_SELECTOR,"button.btn")
+    button = browser.find_element(By.CSS_SELECTOR, "button.btn")
     button.click()
     time.sleep(0.1)
-    text = browser.find_element(By.TAG_NAME,'h1')
+    text = browser.find_element(By.TAG_NAME, 'h1')
     assert text.text == "Congratulations! You have successfully registered!"
 finally:
-    time.sleep(5)
+    time.sleep(10)
     browser.quit()
